@@ -1,6 +1,6 @@
 {
   "name": "bin-allocator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "allocate values to bins defined by their lower bound delimitor value",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -70,7 +70,7 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-spec-reporter": "0.0.26",
     "mkdirp": "^0.5.1",
-    "randombins": "^1.0.0",
+    "randombins": "^2.0.2",
     "remap-istanbul": "^0.8.4",
     "rimraf": "^2.5.4",
     "tsify": "^3.0.1",
