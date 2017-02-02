@@ -30,18 +30,22 @@ const log = debug('example:')
 debug.enable('example:')
 
 // create bins, i.e. a list of randomly selected bin delimitor strings
-const getRandomBins = getRandomBinsFactory({ size: 16, randomshuffle: <T>(arr: T[]) => arr }) // no shuffle
+const getRandomBins = getRandomBinsFactory({ size: 16 }) // no shuffle
 const alphabet = '-abcdefghijklmnopqrstuvw_'
 getRandomBins([ alphabet, alphabet ])
+.reduce((bins , bin) => bins.concat(bin), <string[]>[])
 .then(bins => {
   const orderedbins = getBinAllocator(bins)
   log('number of bins:', orderedbins.length) // 16
   log('delimitor strings:', orderedbins.map(s => s)) // e.g. ["--", "-p", "bd", ..., "ws"]
 
   const words = [ 'this', 'is', 'an', 'example' ]
-  const indexes = words.map(word => orderedbins.indexOf(word))
+  const map = words.reduce((map, word) => {
+    map[word] = orderedbins.indexOf(word)
+    return map
+  }, {})
 
-  log('indexes of bins for words %o: %o', words, indexes) // e.g. indexes of ... [12, 6, 1, 4]
+  log('words to corresponding bin index: %o', map) // e.g. { an: 1, example: 4, is: 6, this: 12 }
 })
 ```
 the files of this example are available [here](./spec/example).
